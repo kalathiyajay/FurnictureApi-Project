@@ -20,6 +20,22 @@ exports.addReview = async (req, res)=> {
     }
 };
 
+exports.allReviewData = async (req,res)=>{
+
+    try {
+        let AllUserReview = await reviewServices.allUserReview({isDelete:false});
+    
+        if(!AllUserReview)
+        {
+            res.json({message:"Data Not Found"})
+        }
+        res.json({AllUserReview,message:"all data Found"});
+    } catch (error) {
+        console.log(error);
+        res.json(error.message);
+    }
+};
+
 exports.allReview = async (req,res)=>{
     let ID = req.params.id
     let allData = await reviewServices.specificUserReview(ID);
